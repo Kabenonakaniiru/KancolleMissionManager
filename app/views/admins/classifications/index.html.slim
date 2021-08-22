@@ -10,4 +10,4 @@ h3 分類マスタ
     - @classifications.each do |classification|
       tr
         td = classification.id
-        td = classification.name
+        td = link_to classification.name, edit_admins_classification_path(classification)
