@@ -18,6 +18,13 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+    # 簡易にindex頁のsortを行う。(デフォルトでid昇順指定)
+    def easy_index_sort(received_params, search_query)
+      @q = search_query.ransack(received_params[:q])
+      @q.sorts = 'id asc' if @q.sorts.empty?
+      @q.result
+    end
+
     def manipulate_message(target, manipulate, target_name, result)
       p target_name
       "#{target}#{target_name.nil? ? '' : '[' + target_name + ']'}の#{manipulate}に#{result ? '成功' : '失敗'}しました。"

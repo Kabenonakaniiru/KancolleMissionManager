@@ -3,10 +3,7 @@ class Admins::ClassificationsController < ApplicationController
   before_action :target_classification, only: %i[edit update destroy]
 
   def index
-    # TODO: この辺り、共通化できそうなので、後でやること。
-    @q = Classification.all.ransack(params[:q])
-    @q.sorts = 'id asc' if @q.sorts.empty?
-    @classifications = @q.result
+    @classifications = easy_index_sort(params, Classification.all)
   end
 
   def create
