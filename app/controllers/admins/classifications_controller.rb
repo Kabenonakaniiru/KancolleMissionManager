@@ -7,20 +7,24 @@ class Admins::ClassificationsController < ApplicationController
   end
 
   def create
-    do_transaction('登録', admins_classifications_url, :index, nil) { Classification.create!(classification_params) }
+    do_transaction('登録', admins_classifications_url, :new, :index, nil) do
+      Classification.create!(classification_params)
+    end
   end
 
   def update
-    do_transaction('更新', edit_admins_classification_url, :edit, nil) { @classification.update!(classification_params) }
+    do_transaction('更新', edit_admins_classification_url, :edit, :edit, nil) do
+      @classification.update!(classification_params)
+    end
   end
 
   def destroy
-    do_transaction('削除', admins_classifications_url, :index, @classification.name) { @classification.destroy! }
+    do_transaction('削除', admins_classifications_url, :edit, :index, @classification.name) { @classification.destroy! }
   end
 
   private
     # FIXME: 実装が進むと呼び出されるはずだが、呼び出しをしない場合は削除すること。
-    def classification_manipulate_message(manipulate, target_name, result)
+    def customized_manipulate_message(manipulate, target_name, result)
       manipulate_message('分類マスタ', manipulate, target_name, result)
     end
 

@@ -26,8 +26,31 @@ class ApplicationController < ActionController::Base
     end
 
     def manipulate_message(target, manipulate, target_name, result)
-      p target_name
       "#{target}#{target_name.nil? ? '' : '[' + target_name + ']'}の#{manipulate}に#{result ? '成功' : '失敗'}しました。"
+    end
+
+    def do_transaction(manipulate, success_url, validation_error_action, others_error_action, target_name, &block)
+      ActiveRecord::Base.transaction(&block)
+      redirect_to success_url, notice: customized_manipulate_message(manipulate, target_name, true)
+    rescue ActiveRecord::RecordInvalid => e
+      logger.error(e)
+      begin
+        e.record.errors.each { |error| logger.error(error) }
+      rescue StandardError => e2
+        logger.error(e2)
+      end
+      flash[:alert] =
+        "#{customized_manipulate_message(manipulate, target_name, false)} 詳細メッセージ:[#{e.message}]"
+      redirect_to action: validation_error_action
+    rescue StandardError => e
+      logger.error(e)
+      flash[:alert] = "#{customized_manipulate_message(manipulate, target_name, false)} 詳細メッセージ:[#{e.message}]"
+      redirect_to action: others_error_action
+    end
+
+    # 抽象メソッド：継承して使うメッセージメソッド
+    def customized_manipulate_message
+      raise 'Called abstract method: manipulate_message'
     end
 
   private

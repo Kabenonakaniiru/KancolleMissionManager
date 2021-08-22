@@ -20,15 +20,15 @@ class Admins::MissionsController < ApplicationController
   end
 
   def create
-    do_transaction('登録', admins_missions_url, :index, nil) { Mission.create!(mission_params) }
+    do_transaction('登録', admins_missions_url, :new, :index, nil) { Mission.create!(mission_params) }
   end
 
   def update
-    do_transaction('更新', edit_admins_mission_url, :edit, nil) { @mission.update!(mission_params) }
+    do_transaction('更新', edit_admins_mission_url, :edit, :edit, nil) { @mission.update!(mission_params) }
   end
 
   def destroy
-    do_transaction('削除', admins_missions_url, :index, @mission.name) { @mission.destroy! }
+    do_transaction('削除', admins_missions_url, :edit, :index, @mission.name) { @mission.destroy! }
   end
 
   def find_mission_area
@@ -49,7 +49,7 @@ class Admins::MissionsController < ApplicationController
   end
 
   private
-    def mission_manipulate_message(manipulate, target_name, result)
+    def customized_manipulate_message(manipulate, target_name, result)
       manipulate_message('任務マスタ', manipulate, target_name, result)
     end
 
@@ -74,28 +74,5 @@ class Admins::MissionsController < ApplicationController
     def target_mission_params
       params.permit(%i[n1_1 n1_2 n1_3 n1_4 n1_5 n1_6 n2_1 n2_2 n2_3 n2_4 n2_5 n3_1 n3_2 n3_3 n3_4 n3_5 n4_1 n4_2 n4_3
                        n4_4 n4_5 n5_1 n5_2 n5_3 n5_4 n5_5 n6_1 n6_2 n6_3 n6_4 n6_5 n7_1 n7_2_1 n7_2_2 n7_3_1 n7_3_2])
-    end
-
-    def do_transaction(manipulate, success_url, error_action, target_name, &block)
-      ActiveRecord::Base.transaction(&block)
-      redirect_to success_url, notice: mission_manipulate_message(manipulate, target_name, true)
-    rescue ActiveRecord::RecordInvalid => e
-      logger.error(e)
-      begin
-        # TODO: 後で消す事
-        pp 'before'
-        e.record.errors.each { |error| pp error }
-      rescue StandardError => e2
-        logger.error(e2)
-      end
-      # TODO: 後で消す事
-      p 'after'
-      flash[:alert] =
-        "#{mission_manipulate_message(manipulate, target_name, false)} 詳細メッセージ:[#{e.message}]"
-      redirect_to action: error_action
-    rescue StandardError => e
-      logger.error(e)
-      flash[:alert] = "#{mission_manipulate_message(manipulate, target_name, false)} 詳細メッセージ:[#{e.message}]"
-      redirect_to action: error_action
     end
 end
