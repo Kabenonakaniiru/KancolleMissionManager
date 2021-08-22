@@ -3,7 +3,7 @@ class Admins::ClassificationsController < ApplicationController
   before_action :target_classification, only: %i[edit update destroy]
 
   def index
-    @classifications = Classification.all
+    @classifications = Classification.all.order(:id)
   end
 
   def create
