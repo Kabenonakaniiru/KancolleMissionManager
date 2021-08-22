@@ -17,6 +17,8 @@ Rails.application.routes.draw do
       get 'find_mission_area'
       post 'mission_area_save'
     end
+    # TODO: ひとまず生成。後で精査。
+    resources :classifications
   end
 
   get '*path', controller: 'application', action: 'render_404'
