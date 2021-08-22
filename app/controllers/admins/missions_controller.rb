@@ -82,11 +82,13 @@ class Admins::MissionsController < ApplicationController
     rescue ActiveRecord::RecordInvalid => e
       logger.error(e)
       begin
+        # TODO: 後で消す事
         pp 'before'
         e.record.errors.each { |error| pp error }
       rescue StandardError => e2
         logger.error(e2)
       end
+      # TODO: 後で消す事
       p 'after'
       flash[:alert] =
         "#{mission_manipulate_message(manipulate, target_name, false)} 詳細メッセージ:[#{e.message}]"
