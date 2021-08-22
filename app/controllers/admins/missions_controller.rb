@@ -1,7 +1,7 @@
 class Admins::MissionsController < ApplicationController
   before_action :authenticate_admin!
   before_action :classifications
-  before_action :target_mission, only: [:edit, :update, :destroy]
+  before_action :target_mission, only: %i[edit update destroy]
 
   def index
     parent_sea_areas = Area.where(level: 1)
@@ -67,21 +67,31 @@ class Admins::MissionsController < ApplicationController
         :classification_id,
         :limited,
         :url,
-        :note)
+        :note
+      )
     end
 
     def target_mission_params
-      params.permit(%i[n1_1 n1_2 n1_3 n1_4 n1_5 n1_6 n2_1 n2_2 n2_3 n2_4 n2_5 n3_1 n3_2 n3_3 n3_4 n3_5 n4_1 n4_2 n4_3 n4_4 n4_5 n5_1 n5_2 n5_3 n5_4 n5_5 n6_1 n6_2 n6_3 n6_4 n6_5 n7_1 n7_2_1 n7_2_2 n7_3_1 n7_3_2])
+      params.permit(%i[n1_1 n1_2 n1_3 n1_4 n1_5 n1_6 n2_1 n2_2 n2_3 n2_4 n2_5 n3_1 n3_2 n3_3 n3_4 n3_5 n4_1 n4_2 n4_3
+                       n4_4 n4_5 n5_1 n5_2 n5_3 n5_4 n5_5 n6_1 n6_2 n6_3 n6_4 n6_5 n7_1 n7_2_1 n7_2_2 n7_3_1 n7_3_2])
     end
 
-    def do_transaction(manipulate, success_url, error_action, target_name)
-      ActiveRecord::Base.transaction do
-        # TODO: ModelViewへの切り出し。
-        # TODO: Validationの実装
-        yield
-      end
+    def do_transaction(manipulate, success_url, error_action, target_name, &block)
+      ActiveRecord::Base.transaction(&block)
       redirect_to success_url, notice: mission_manipulate_message(manipulate, target_name, true)
-    rescue => e
+    rescue ActiveRecord::RecordInvalid => e
+      logger.error(e)
+      begin
+        pp 'before'
+        e.record.errors.each { |error| pp error }
+      rescue StandardError => e2
+        logger.error(e2)
+      end
+      p 'after'
+      flash[:alert] =
+        "#{mission_manipulate_message(manipulate, target_name, false)} 詳細メッセージ:[#{e.message}]"
+      redirect_to action: error_action
+    rescue StandardError => e
       logger.error(e)
       flash[:alert] = "#{mission_manipulate_message(manipulate, target_name, false)} 詳細メッセージ:[#{e.message}]"
       redirect_to action: error_action
