@@ -1,5 +1,10 @@
 class Admins::ClassificationsController < ApplicationController
+  before_action :authenticate_admin!
   before_action :target_classification, only: %i[edit update destroy]
+
+  def index
+    @classifications = Classification.all
+  end
 
   def create
     do_transaction('登録', admins_classifications_url, :index, nil) { Classification.create!(classification_params) }
