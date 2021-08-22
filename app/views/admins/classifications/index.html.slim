@@ -4,7 +4,7 @@ h3 分類マスタ
   table.mission-editable.table.table-sm.table-bordered
     thead.thead-light.text-center
       tr
-        th #
+        th = sort_link(@q, :id, '#', default_order: :asc)
         th 分類名
     tbody
     - @classifications.each do |classification|

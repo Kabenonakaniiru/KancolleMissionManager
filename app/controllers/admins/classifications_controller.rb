@@ -3,7 +3,8 @@ class Admins::ClassificationsController < ApplicationController
   before_action :target_classification, only: %i[edit update destroy]
 
   def index
-    @classifications = Classification.all.order(:id)
+    @q = Classification.all.ransack(params[:q])
+    @classifications = @q.result
   end
 
   def create
