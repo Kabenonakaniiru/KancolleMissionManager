@@ -7,7 +7,7 @@ nav.navbar.navbar-dark.bg-dark
       = link_to admins_missions_path, class: 'dropdown-item'
         |任務マスタ
       = link_to admins_classifications_path, class: 'dropdown-item'
-        |期間マスタ
+        |分類マスタ
       .dropdown-divider
       - if admin_logged_in?
         = link_to destroy_admin_session_path, class: 'dropdown-item', method: :delete
