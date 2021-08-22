@@ -186,6 +186,10 @@ GEM
       thor (~> 1.0)
     rainbow (3.0.0)
     rake (13.0.3)
+    ransack (2.4.2)
+      activerecord (>= 5.2.4)
+      activesupport (>= 5.2.4)
+      i18n
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -299,6 +303,7 @@ DEPENDENCIES
   omniauth
   puma (>= 5.2.2)
   rails (>= 6.1)
+  ransack
   redis (~> 4.0)
   rubocop
   rubocop-minitest

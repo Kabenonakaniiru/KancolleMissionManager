@@ -80,3 +80,6 @@ gem 'html2slim', '~> 0.2.0'
 # Sentry
 gem 'sentry-rails'
 gem 'sentry-ruby'
+
+# Ransack
+gem 'ransack'
