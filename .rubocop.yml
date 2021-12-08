@@ -273,3 +273,6 @@ Performance/DeleteSuffix:
 
 Style/AsciiComments:
   Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
