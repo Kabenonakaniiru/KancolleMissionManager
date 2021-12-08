@@ -7,15 +7,11 @@ class Admins::ClassificationsController < ApplicationController
   end
 
   def create
-    do_transaction('登録', admins_classifications_url, :new, :index, nil) do
-      Classification.create!(classification_params)
-    end
+    do_transaction('登録', admins_classifications_url, :new, :index, nil) { Classification.create!(classification_params) }
   end
 
   def update
-    do_transaction('更新', edit_admins_classification_url, :edit, :edit, nil) do
-      @classification.update!(classification_params)
-    end
+    do_transaction('更新', edit_admins_classification_url, :edit, :edit, nil) { @classification.update!(classification_params) }
   end
 
   def destroy
