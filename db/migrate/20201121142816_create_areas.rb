@@ -11,7 +11,7 @@ class CreateAreas < ActiveRecord::Migration[6.0]
     reversible do |dir|
       dir.up do
         # UNIQUE制約を追加
-        add_index :areas, [:level, :parent_area_id, :name], unique: true
+        add_index :areas, %i[level parent_area_id name], unique: true
         # CHECK制約を追加
         execute 'ALTER TABLE areas ADD CONSTRAINT check_areas_level CHECK (1 <= level AND level <= 3);'
         execute 'ALTER TABLE areas ADD CONSTRAINT check_areas_parent_area CHECK (level = 1  AND parent_area_id IS NULL OR 2 <= level  AND level <=3 AND parent_area_id IS NOT NULL);'
@@ -20,7 +20,7 @@ class CreateAreas < ActiveRecord::Migration[6.0]
       dir.down do
         execute 'ALTER TABLE areas DROP CONSTRAINT check_areas_level;'
         execute 'ALTER TABLE areas DROP CONSTRAINT check_areas_parent_area;'
-        remove_index :areas, [:level, :parent_area_id, :name]
+        remove_index :areas, %i[level parent_area_id name]
       end
     end
   end
