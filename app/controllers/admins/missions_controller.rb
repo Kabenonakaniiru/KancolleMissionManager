@@ -37,7 +37,7 @@ class Admins::MissionsController < ApplicationController
   end
 
   def mission_area_save
-    # TODO: ここ、パラメータを"id"に出来れば、target_missionを使えるようになるはずなので、なんとかしたい。
+    # TODO: ここ、パラメータを"id"に出来れば、target_missionを使えるようになるはずなので、なんとかしたい。TODO: mission_idでエラーが出ている。
     @mission = Mission.find(params[:mission_id])
     ActiveRecord::Base.transaction do
       # TODO: ModelViewへの切り出し。
