@@ -4,7 +4,7 @@ class CreateAreas < ActiveRecord::Migration[6.0]
       t.integer :level, null: false, limit: 1, default: 1
       t.references :parent_area
       t.string :name, null: false, limit: 3
-      t.string :column_name, limit: 6
+      t.string :column_name, limit: 7
       t.timestamps null: false, default: -> { 'NOW()' }
     end
 
