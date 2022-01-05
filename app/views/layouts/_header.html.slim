@@ -1,12 +1,13 @@
 nav.navbar.navbar-dark.bg-dark
   <a class="navbar-brand" href="#">艦隊これくしょん 出撃回数管理ツール(仮)</a>
   .dropdown
-    / TODO: ログアウトした時に両方のユーザがログアウトさせられる。要調査。
     a#dropdownMenuLink.btn.btn-secondary.dropdown-toggle href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
       |メニュー
     .dropdown-menu.dropdown-menu-right aria-labelledby="dropdownMenuLink"
-      a.dropdown-item href="#"
-        |Action(何か実装予定)
+      = link_to admins_missions_path, class: 'dropdown-item'
+        |任務マスタ
+      = link_to admins_classifications_path, class: 'dropdown-item'
+        |分類マスタ
       .dropdown-divider
       - if admin_logged_in?
         = link_to destroy_admin_session_path, class: 'dropdown-item', method: :delete

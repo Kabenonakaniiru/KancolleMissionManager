@@ -1,0 +1,35 @@
+// Place all the styles related to the missions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.mission-editable {
+  thead tr th { 
+    // position: sticky; 
+    // top:0;
+    white-space: nowrap
+  }
+  tbody tr td { 
+    white-space: nowrap
+  }
+  // .mission-header{
+  //   position: sticky;
+  //   top: 0;
+  //   left: 0;
+  // }
+  .mission-count-display-cell {
+    display: inline-block;
+    width: 2rem;
+    max-width: 2rem;
+    max-height: 1.5rem;
+  }
+
+  .mission-count-editor {
+    max-width: 2rem;
+    max-height: 1.5rem;
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+}

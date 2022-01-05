@@ -8,8 +8,17 @@ html lang="ja"
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all'
+    script
+      | FontAwesomeConfig = { autoReplaceSvg: "nest"}
     = javascript_pack_tag 'application'
+    = javascript_pack_tag javascript_path
+    / TODO: 完全に不要と思ったら削除すること
+    / script alert(window.FontAwesome.config.autoReplaceSvg); 
   body
+    .d-flex.justify-content-center
+      #loading-image.spinner-border.d-none role="status"
+        .sr-only
+          | Loading...
     .container-fluid
       = render "layouts/header"
       = yield

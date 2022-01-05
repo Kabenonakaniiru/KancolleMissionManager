@@ -1,0 +1,14 @@
+h3 分類マスタ
+= link_to '新規登録', new_admins_classification_path, class: 'btn btn-secondary'
+.table-responsive
+  table.mission-editable.table.table-sm.table-bordered
+    thead.thead-light.text-center
+      tr
+        / TODO: 列幅指定すること。(現状では広く表示されてしまう)
+        th = sort_link(@q, :id, '#')
+        th 分類名
+    tbody
+    - @classifications.each do |classification|
+      tr
+        td = classification.id
+        td = link_to classification.name, edit_admins_classification_path(classification)

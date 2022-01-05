@@ -1,0 +1,45 @@
+h3 任務一覧
+= link_to '新規登録', new_admins_mission_path, class: 'btn btn-secondary'
+.table-responsive
+  table.mission-editable.table.table-sm.table-bordered
+    thead.thead-light.text-center
+      / TODO: 余裕のある時にcolgroupが使えないか検討。
+      tr
+        th.mission-header scope="col" colspan=5 任務情報
+        th scope="col" colspan="#{@total_parent_sea_area_count}" 海域情報
+      tr
+        th scope="col" rowspan=3 = sort_link(@q, :id, '#')
+        th scope="col" rowspan=3 任務名
+        th scope="col" rowspan=3 任務種別
+        th scope="col" rowspan=3 海域種別
+        th scope="col" rowspan=3 攻略情報
+        /  FIXME: 一旦排除した。必要性を精査すること。
+        / th scope="col" rowspan=3 備考
+        th scope="col" rowspan=3 編集
+        - @header_parent_areas.each do |name, specify_count|
+          th scope="col" colspan="#{specify_count}" = name
+      tr
+        / 1
+        - @header_children_areas.each do |header_children_area|
+          th = header_children_area['name']
+    tbody
+    - @missions.each do |mission|
+      tr
+        td = mission.id
+        td = link_to mission.name, edit_admins_mission_path(mission)
+        td = mission.classification.name
+        td = mission.limited ? '限定海域' : '通常海域'
+        - if mission.url.present?
+          td
+            = link_to '[こちら]', mission.url, target: :_blank
+            i.fas.fa-external-link-alt
+        / TODO: 備考については表示する文字数に制限を入れること FIXME: 一旦排除した。必要性を精査すること。
+        / td = mission.note
+        td
+          i.fas.fa-edit.edit-row-icon
+          = link_to '', admins_mission_find_mission_area_path(mission), class: 'row_get_link d-none'
+          = link_to '', admins_mission_mission_area_save_path(mission), method: :post, class: 'row_save_link d-none'
+        - @mission_count_areas.each do |mission_count_area|
+          td.mission-count-area
+            span.mission-count-display-cell = mission[mission_count_area.column_name]
+            = number_field_tag mission_count_area.column_name, mission[mission_count_area.column_name], min: 0, max: 99, class: 'mission-count-editor d-none', data: { colname: "#{mission_count_area.column_name}" }

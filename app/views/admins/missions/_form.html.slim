@@ -1,0 +1,17 @@
+/  TODO: ymlへの切り出し
+.form-group
+  = f.label :name, '任務名'
+  = f.text_field :name, class: 'form-control'
+.form-group
+  = f.label :classification_id, '分類'
+  = f.collection_select(:classification_id, @classifications, :id, :name, {}, {class: 'form-control'})
+/ TODO: 後で非表示フラグor表示期間を設定する。
+.form-group.form-check
+  = f.check_box :limited, {class: 'form-check-input'}, 'true', 'false'
+  = f.label :limited, '限定海域', class: 'form-check-label'
+.form-group
+  = f.label :url, '攻略サイトアドレス'
+  = f.url_field :url, class: 'form-control'
+.form-group
+  = f.label :note, '備考'
+  = f.text_area :note, class: 'form-control'

@@ -4,13 +4,14 @@
 require:
   - rubocop-packaging
   - rubocop-performance
+  - rubocop-minitest
   - rubocop-rails
 
 AllCops:
   TargetRubyVersion: 2.7
   # RuboCop has a bunch of cops enabled by default. This setting tells RuboCop
   # to ignore them, so only the ones explicitly set in this file are enabled.
-  DisabledByDefault: true
+  DisabledByDefault: false
   Exclude:
     - '**/tmp/**/*'
     - '**/templates/**/*'
@@ -19,6 +20,7 @@ AllCops:
     - 'actionmailbox/test/dummy/**/*'
     - 'actiontext/test/dummy/**/*'
     - '**/node_modules/**/*'
+    - 'db/schema.rb'
 
 Performance:
   Exclude:
@@ -268,3 +270,9 @@ Performance/DeletePrefix:
 
 Performance/DeleteSuffix:
   Enabled: true
+
+Style/AsciiComments:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
