@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 2020_11_21_142816) do
     t.integer "n_7_2_2", limit: 1, default: 0, null: false
     t.integer "n_7_3_1", limit: 1, default: 0, null: false
     t.integer "n_7_3_2", limit: 1, default: 0, null: false
+    t.integer "n_7_4", limit: 1, default: 0, null: false
     t.datetime "created_at", precision: 6, default: -> { "current_timestamp(6)" }, null: false
     t.datetime "updated_at", precision: 6, default: -> { "current_timestamp(6)" }, null: false
     t.index ["classification_id"], name: "index_missions_on_classification_id"
@@ -139,6 +140,7 @@ ActiveRecord::Schema.define(version: 2020_11_21_142816) do
     t.check_constraint "0 <= `n_7_2_2` and `n_7_2_2` <= 99", name: "check_missions_n_7_2_2"
     t.check_constraint "0 <= `n_7_3_1` and `n_7_3_1` <= 99", name: "check_missions_n_7_3_1"
     t.check_constraint "0 <= `n_7_3_2` and `n_7_3_2` <= 99", name: "check_missions_n_7_3_2"
+    t.check_constraint "0 <= `n_7_4` and `n_7_4` <= 99", name: "check_missions_n_7_4"
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|

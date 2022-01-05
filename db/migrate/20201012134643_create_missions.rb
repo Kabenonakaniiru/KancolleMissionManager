@@ -42,6 +42,7 @@ class CreateMissions < ActiveRecord::Migration[6.0]
       t.integer :n_7_2_2, null: false, limit: 1, default: 0
       t.integer :n_7_3_1, null: false, limit: 1, default: 0
       t.integer :n_7_3_2, null: false, limit: 1, default: 0
+      t.integer :n_7_4, null: false, limit: 1, default: 0
       t.timestamps null: false, default: -> { 'NOW()' }
     end
 
@@ -84,6 +85,7 @@ class CreateMissions < ActiveRecord::Migration[6.0]
         execute 'ALTER TABLE missions ADD CONSTRAINT check_missions_n_7_2_2 CHECK (0 <= n_7_2_2 AND n_7_2_2 <= 99);'
         execute 'ALTER TABLE missions ADD CONSTRAINT check_missions_n_7_3_1 CHECK (0 <= n_7_3_1 AND n_7_3_1 <= 99);'
         execute 'ALTER TABLE missions ADD CONSTRAINT check_missions_n_7_3_2 CHECK (0 <= n_7_3_2 AND n_7_3_2 <= 99);'
+        execute 'ALTER TABLE missions ADD CONSTRAINT check_missions_n_7_4 CHECK (0 <= n_7_4 AND n_7_4 <= 99);'
       end
 
       dir.down do
@@ -123,6 +125,7 @@ class CreateMissions < ActiveRecord::Migration[6.0]
         execute 'ALTER TABLE missions DROP CONSTRAINT check_missions_n_7_2_2;'
         execute 'ALTER TABLE missions DROP CONSTRAINT check_missions_n_7_3_1;'
         execute 'ALTER TABLE missions DROP CONSTRAINT check_missions_n_7_3_2;'
+        execute 'ALTER TABLE missions DROP CONSTRAINT check_missions_n_7_4;'
       end
     end
   end

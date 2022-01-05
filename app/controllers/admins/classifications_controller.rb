@@ -37,7 +37,7 @@ class Admins::ClassificationsController < ApplicationController
     # TODO: 後で修正
     # def target_mission_params
     #   params.permit(%i[n_1_1 n_1_2 n_1_3 n_1_4 n_1_5 n_1_6 n_2_1 n_2_2 n_2_3 n_2_4 n_2_5 n_3_1 n_3_2 n_3_3 n_3_4 n_3_5 n_4_1 n_4_2 n_4_3
-    #                    n_4_4 n_4_5 n_5_1 n_5_2 n_5_3 n_5_4 n_5_5 n_6_1 n_6_2 n_6_3 n_6_4 n_6_5 n_7_1 n_7_2_1 n_7_2_2 n_7_3_1 n_7_3_2])
+    #                    n_4_4 n_4_5 n_5_1 n_5_2 n_5_3 n_5_4 n_5_5 n_6_1 n_6_2 n_6_3 n_6_4 n_6_5 n_7_1 n_7_2_1 n_7_2_2 n_7_3_1 n_7_3_2 n_7_4])
     # end
 
     def target_classification
