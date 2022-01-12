@@ -7,7 +7,7 @@ class Admins::MissionsController < ApplicationController
     parent_sea_areas = Area.where(level: 1)
     # FIXME: 一旦定義。後でデータからカウントを取るように修正する。
     # 第一階層の定義を強引に作る
-    parent_sea_area_counts = [6, 5, 5, 5, 5, 5, 5]
+    parent_sea_area_counts = [6, 5, 5, 5, 5, 5, 6]
     @header_parent_areas = {}
     parent_sea_areas.each_with_index do |parent_sea_area, i|
       @header_parent_areas.store(parent_sea_area.name, parent_sea_area_counts[i])
