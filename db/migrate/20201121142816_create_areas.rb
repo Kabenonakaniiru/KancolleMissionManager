@@ -5,7 +5,7 @@ class CreateAreas < ActiveRecord::Migration[6.0]
       t.references :parent_area, type: :bigint
       t.string :name, null: false, limit: 3
       t.string :column_name, limit: 7
-      t.timestamps null: false, default: -> { 'NOW()' }
+      t.timestamps null: false, default: -> { "current_timestamp(6)" }
     end
 
     reversible do |dir|
