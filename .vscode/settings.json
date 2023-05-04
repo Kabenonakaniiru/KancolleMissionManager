@@ -6,5 +6,6 @@
     "editor.tabSize": 2,
     "ruby.codeCompletion": "rcodetools",
     "ruby.intellisense": "rubyLocate",
-    "editor.renderWhitespace": "all"
+    "editor.renderWhitespace": "all",
+    "git.useEditorAsCommitInput": false
 }
