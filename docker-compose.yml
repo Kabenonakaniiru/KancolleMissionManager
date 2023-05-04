@@ -1,0 +1,40 @@
+services:
+  app:
+    environment:
+      LANG: ja_JP.UTF-8
+      TZ: 'Asia/Tokyo'
+    build:
+      dockerfile: docker/Dockerfile
+      args:
+        RUBY_VERSION: 3.2.2
+        BUNDLER_VERSION: 2.4.12
+        DOCKER_USER: kabe
+        DOCKER_USER_PASS: user_pass
+        DEFAULT_BRANCH: feature/upgrade_to_ruby3_2_2
+    ports:
+      - 50001:3000
+    depends_on:
+      - db
+    networks:
+      - app-network
+    tty: true
+
+  db:
+    image: mysql:8.0.33
+    container_name: app-db
+    volumes:
+      - db-data:/var/lib/mysql
+    # TODO: 後でユーザーは分けること。collation指定など、https://hub.docker.com/_/mysqlを見て指定すること。
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      TZ: "Asia/Tokyo"
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    networks:
+      - app-network
+    ports:
+      - 50002:3306
+networks:
+  app-network:
+volumes:
+  db-data:
