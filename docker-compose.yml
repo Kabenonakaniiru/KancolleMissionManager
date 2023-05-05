@@ -24,11 +24,11 @@ services:
     container_name: app-db
     volumes:
       - db-data:/var/lib/mysql
+      - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
     # TODO: 後でユーザーは分けること。collation指定など、https://hub.docker.com/_/mysqlを見て指定すること。
     environment:
       MYSQL_ROOT_PASSWORD: root_password
       TZ: "Asia/Tokyo"
-    command: --default-authentication-plugin=mysql_native_password
     restart: always
     networks:
       - app-network
