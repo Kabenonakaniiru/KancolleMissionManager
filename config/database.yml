@@ -12,6 +12,7 @@
 default: &default
   adapter: mysql2
   encoding: utf8mb4
+  collation: utf8mb4_bin
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   # connect user, pass, host, port, database, socket, flags, conn_attrs
   host: <%= ENV['KANCOLLEMISSIONMANAGER_DATABASE_HOST'] %>

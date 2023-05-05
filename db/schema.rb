@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2020_11_21_142816) do
 
-  create_table "admins", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "admins", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2020_11_21_142816) do
     t.index ["unlock_token"], name: "index_admins_on_unlock_token", unique: true
   end
 
-  create_table "areas", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "areas", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "level", limit: 1, default: 1, null: false
     t.bigint "parent_area_id"
     t.string "name", limit: 3, null: false
@@ -51,14 +51,14 @@ ActiveRecord::Schema.define(version: 2020_11_21_142816) do
     t.check_constraint "(1 <= `level`) and (`level` <= 3)", name: "check_areas_level"
   end
 
-  create_table "classifications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "classifications", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, default: -> { "CURRENT_TIMESTAMP(6)" }, null: false
     t.datetime "updated_at", precision: 6, default: -> { "CURRENT_TIMESTAMP(6)" }, null: false
     t.index ["name"], name: "index_classifications_on_name", unique: true
   end
 
-  create_table "missions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "missions", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "classification_id", null: false
     t.boolean "limited", default: false, null: false
@@ -143,7 +143,7 @@ ActiveRecord::Schema.define(version: 2020_11_21_142816) do
     t.check_constraint "(0 <= `n_7_4`) and (`n_7_4` <= 99)", name: "check_missions_n_7_4"
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
