@@ -48,6 +48,7 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   # N+1検知用(https://github.com/flyerhzm/bullet)
   gem 'bullet'
+  gem 'letter_opener_web'
 end
 
 group :test do
