@@ -1,7 +1,11 @@
 class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
   rescue_from ActionController::RoutingError, with: :render_404
-  rescue_from Exception, with: :render_500
+  rescue_from Exception do |exception|
+    logger.error(exception.inspect)
+    Sentry.capture_exception(exception)
+    render_500
+  end
 
   helper_method :logged_in?, :admin_logged_in?
   before_action :set_sentry_context # TODO: 認証後のコントローラは前のコントローラと分ける。このクラスはあくまでも基底クラスとして使う, :authenticate_user!
