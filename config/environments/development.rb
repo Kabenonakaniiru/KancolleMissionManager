@@ -111,7 +111,7 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
   # Action Mailer URL
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.delivery_method = :letter_opener_web
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_options = { from: 'no-reply@example.com' } # FIXME: いつか変更
@@ -125,4 +125,7 @@ Rails.application.configure do
   #   authentication:       'plain',
   #   enable_starttls_auto: true
   # }
+
+  config.web_console.allowed_ips = '0.0.0.0/0'
+  config.logger = Sentry::Logger.new(STDOUT)
 end

@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     # TODO: ひとまず生成。後で精査。
     resources :classifications
   end
+  ## 開発環境用letter_opener
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
   get '*path', controller: 'application', action: 'render_404'
 end

@@ -78,3 +78,10 @@ yarn-debug.log*
 
 # Ignore redis
 dump.rdb
+
+# docker-vscode連携で自動生成されるディレクトリを無視
+.dotnet
+.vscode-server
+
+# dockerdesktopに拠って自動生成されるcredentialを無視
+.gitconfig

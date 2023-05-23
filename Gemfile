@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.3'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.1'
 # Use mysql as the database for Active Record
@@ -50,6 +48,7 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   # N+1検知用(https://github.com/flyerhzm/bullet)
   gem 'bullet'
+  gem 'letter_opener_web'
 end
 
 group :test do
@@ -67,8 +66,7 @@ gem 'tzinfo-data'
 gem 'kaminari'
 
 # auth
-# TODO: https://www.takayasugiyama.com/entry/2021/01/17/043512 の記事を参考にエラー回避。どこかのタイミングで修正確認すること。
-gem 'devise', git: 'https://github.com/heartcombo/devise.git', branch: 'ca-omniauth-2'
+gem 'devise'
 gem 'omniauth'
 
 # slim generator

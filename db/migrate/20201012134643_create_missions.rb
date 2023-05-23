@@ -43,7 +43,7 @@ class CreateMissions < ActiveRecord::Migration[6.0]
       t.integer :n_7_3_1, null: false, limit: 1, default: 0
       t.integer :n_7_3_2, null: false, limit: 1, default: 0
       t.integer :n_7_4, null: false, limit: 1, default: 0
-      t.timestamps null: false, default: -> { 'NOW()' }
+      t.timestamps null: false, default: -> { "current_timestamp(6)" }
     end
 
     reversible do |dir|
