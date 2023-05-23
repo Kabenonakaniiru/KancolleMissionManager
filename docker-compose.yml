@@ -3,6 +3,7 @@ services:
     environment:
       LANG: ja_JP.UTF-8
       TZ: 'Asia/Tokyo'
+      NODE_OPTIONS: --openssl-legacy-provider
     build:
       dockerfile: docker/Dockerfile
       args:
