@@ -126,5 +126,6 @@ Rails.application.configure do
   #   enable_starttls_auto: true
   # }
 
-  config.web_console.whitelisted_ips = '0.0.0.0/0'
+  config.web_console.allowed_ips = '0.0.0.0/0'
+  config.logger = Sentry::Logger.new(STDOUT)
 end
