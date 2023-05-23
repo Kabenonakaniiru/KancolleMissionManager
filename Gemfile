@@ -66,8 +66,7 @@ gem 'tzinfo-data'
 gem 'kaminari'
 
 # auth
-# TODO: https://www.takayasugiyama.com/entry/2021/01/17/043512 の記事を参考にエラー回避。どこかのタイミングで修正確認すること。
-gem 'devise', git: 'https://github.com/heartcombo/devise.git', branch: 'ca-omniauth-2'
+gem 'devise'
 gem 'omniauth'
 
 # slim generator
