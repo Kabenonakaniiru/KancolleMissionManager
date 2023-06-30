@@ -59,9 +59,6 @@ group :test do
   # gem 'webdrivers' # ※今は要らないので、一旦コメントアウト
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data'
-
 # paging
 gem 'kaminari'
 
