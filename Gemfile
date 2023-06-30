@@ -7,8 +7,8 @@ gem 'rails', '~> 7.0'
 gem 'mysql2', '>= 0.4.4'
 # Use Puma as the app server
 gem 'puma', '>= 5.2.2'
-# Use SCSS for stylesheets
-gem 'sass-rails', '>= 6'
+# Use Sass to process CSS
+gem "sassc-rails"
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '>= 5.3.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
