@@ -3,63 +3,45 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.2"
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 7.0'
+# 標準Gemfile
+# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
+gem "rails", "~> 7.0.6"
 # Use mysql as the database for Active Record
-gem 'mysql2', '>= 0.4.4'
-# Use Puma as the app server
+gem 'mysql2', '>= 0.5.5'
+# Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '>= 5.2.2'
-# Use Sass to process CSS
-gem "sassc-rails"
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '>= 5.3.0'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.7'
+
+# TODO: この辺りはあとでwebpackerから乗り換えする
+# # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
+# gem "importmap-rails"
+# # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+# gem "turbo-rails"
+# # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+# gem "stimulus-rails"
+
+# Build JSON APIs with ease [https://github.com/rails/jbuilder]
+gem "jbuilder"
+
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.0'
-# see https://guides.rubyonrails.org/caching_with_rails.html#cache-stores
-# gem 'redis-rails'
-# gem 'hiredis'
-# FIXME: 検証中
-# gem 'redis', '>= 3.2.0', require: ['redis', 'redis/connection/hiredis']
-# Use Active Model has_secure_password
-gem 'bcrypt', '~> 3.1.7'
 
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+# Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
+# gem "kredis"
+ 
+# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
+gem "bcrypt", "~> 3.1.7"
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
+gem "bootsnap", require: false
+# Use Sass to process CSS
+gem "sassc-rails"
 
-group :development, :test do
-	# See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri mingw x64_mingw ]
-  # https://github.com/bkeepers/dotenv/
-  gem 'dotenv-rails'
-end
+# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+# gem "image_processing", "~> 1.2"
 
-group :development do
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'brakeman', require: false
-  gem 'rubocop', require: false
-  gem 'rubocop-minitest', require: false # https://github.com/rubocop/rubocop-minitest
-  gem 'rubocop-packaging', require: false
-  gem 'rubocop-performance', require: false
-  gem 'rubocop-rails', require: false
-  gem 'web-console', '>= 3.3.0'
-  # N+1検知用(https://github.com/flyerhzm/bullet)
-  gem 'bullet'
-  gem 'letter_opener_web'
-end
-
-group :test do
-  # Adds support for Capybara system testing and selenium driver
-  # gem 'capybara', '>= 2.15' # ※今は要らないので、一旦コメントアウト
-  # gem 'selenium-webdriver' # ※現状使っていないし、そもそもchildprocessの古いバージョンを入れてしまうので、一旦コメントアウト。
-  # Easy installation and use of web drivers to run system tests with browsers
-  # gem 'webdrivers' # ※今は要らないので、一旦コメントアウト
-end
-
+# 非標準Gem
 # paging
 gem 'kaminari'
 
@@ -70,12 +52,47 @@ gem 'omniauth'
 # slim generator
 gem 'slim-rails'
 
-# ERB形式のファイルをslim形式に変換してくれる
-gem 'html2slim', '~> 0.2.0'
-
-# Sentry
+# Notify Error
 gem 'sentry-rails'
 gem 'sentry-ruby'
 
-# Ransack
+# Search Form
 gem 'ransack'
+
+group :development, :test do
+  # 標準Gem
+	# See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  # 非標準Gem
+  # https://github.com/bkeepers/dotenv/
+  gem 'dotenv-rails'
+end
+
+group :development do
+  # 標準Gem
+  # Use console on exceptions pages [https://github.com/rails/web-console]
+  gem "web-console"
+	# Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
+  # gem "rack-mini-profiler"
+  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
+  # gem "spring"
+  # 非標準Gem
+  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
+  gem 'brakeman', require: false
+  gem 'rubocop', require: false
+  gem 'rubocop-minitest', require: false # https://github.com/rubocop/rubocop-minitest
+  gem 'rubocop-packaging', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
+  # N+1検知用(https://github.com/flyerhzm/bullet)
+  gem 'bullet'
+  gem 'letter_opener_web'
+end
+
+group :test do
+  # 標準Gem
+	# Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem "capybara"
+  gem "selenium-webdriver"
+  gem "webdrivers"
+end
