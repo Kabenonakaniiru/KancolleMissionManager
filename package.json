@@ -18,7 +18,7 @@
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
     "vue": "^2.6.12",
-    "vue-loader": "^15.9.3",
+    "vue-loader": "^17.2.2",
     "vue-template-compiler": "^2.6.12",
     "webpack-dev-server": "^3"
   }
